@@ -1,14 +1,18 @@
 import cart from '../pages/cart/index.js'
+import Login from '../pages/login/index.js'
+import header from '../pages/header/index.js'
 
 describe('Carrinho', () => {
     beforeEach(()=> {
-        cart.login()
+        Login.openPage()
+        Login.insertdados('standard_user', 'secret_sauce')
     }) 
 
     it('Deve adicionar o produto ao carrinho corretamente', () => {
+        const quantityproducts = 1
         cart.addtocart('sauce labs bike light')
-        cy.get('[data-test="shopping-cart-badge"]').should('be.visible').and('have.text', '1')
-        cy.get('[data-test="shopping-cart-link"]').click()
+        header.numbercartvalidation(quantityproducts)
+        header.clickoncart()
         cy.contains('Sauce Labs Bike Light').should('be.visible')
         cy.get('[data-test="checkout"]').click()
         cy.url().should('eq', 'https://www.saucedemo.com/checkout-step-one.html')
@@ -16,7 +20,7 @@ describe('Carrinho', () => {
 
     it('Deve remover o produto do carrinho com sucesso', () => {
         cart.addtocart('sauce labs bike light')
-        cy.get('[data-test="shopping-cart-link"]').click()
+        header.clickoncart()
         cy.get('[data-test="remove-sauce-labs-bike-light"]').click()
         cy.get('[data-test="inventory-item-name"]').should('not.exist')  
     })
