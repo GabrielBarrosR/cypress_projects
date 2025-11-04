@@ -1,6 +1,6 @@
 class utils {
     openPage (){
-        cy.visit('https://shopist.io/')
+        cy.visit('/')
     }
 }
 

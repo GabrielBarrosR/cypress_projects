@@ -3,7 +3,7 @@ import {elements as el} from './elements'
 
 class Login{ 
     openPage () {
-        cy.visit("https://www.saucedemo.com/")
+        cy.visit('/')
     }
 
     insertdados (name, password){

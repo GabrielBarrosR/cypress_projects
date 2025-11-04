@@ -5,7 +5,11 @@ import header from '../pages/header/index.js'
 describe('Carrinho', () => {
     beforeEach(()=> {
         Login.openPage()
-        Login.insertdados('standard_user', 'secret_sauce')
+
+        const username = Cypress.env('username')
+        const password = Cypress.env('password')
+
+        Login.insertdados(username, password)
     }) 
 
     it('Deve adicionar o produto ao carrinho corretamente', () => {

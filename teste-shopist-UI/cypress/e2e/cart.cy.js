@@ -8,7 +8,7 @@ describe('cart', () => {
     })
 
     it('Deve adicionar produto no carrinho corretamente', () => {
-        Cart.addProductToCart(1)
+        Cart.addProductToCart(1, true)
 
         cy.get('.description > :nth-child(1) > :nth-child(1)').then(($el) => {
             const productName = $el.text()
@@ -22,5 +22,9 @@ describe('cart', () => {
         cy.get('@ProductName').then((ProductName) => {
             cy.get('.product-description > :nth-child(1)').invoke('text').should('contain', ProductName)
         })
+    })
+    it ('Deve apresentar uma mensagem de erro ao tentar comprar um produto fora de estoque', () => {
+        Cart.addProductToCart(4, false)
+        cy.contains('Oops! This item is sold out').should('be.visible')
     })
 })

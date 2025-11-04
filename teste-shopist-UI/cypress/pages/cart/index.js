@@ -1,8 +1,13 @@
 class Cart {
 
-  addProductToCart(numberProduct) {
-    cy.visit('https://shopist.io/department/chairs')
-    cy.get(`:nth-child(${numberProduct}) > :nth-child(1) > a > .product-card > img`).click()
+  addProductToCart(numberProduct, haveStock ) {
+  let info = ''
+
+  if (haveStock) {
+    info = 'a >'
+  }
+    cy.get(':nth-child(3) > .jumbotron-box > :nth-child(3)').click()
+    cy.get(`:nth-child(${numberProduct}) > :nth-child(1) > ${info} .product-card > img`).click()
   }
 
   purchase(){
@@ -14,3 +19,4 @@ class Cart {
   }
 }
 export default new Cart()
+
