@@ -17,6 +17,11 @@ class Cart {
   openCart() {
     cy.visit('https://shopist.io/cart')
   }
+  applyCoupon(coupon) {
+    cy.get('input').type(coupon)
+    cy.get('.discount > div').click()
+  }
 }
+
 export default new Cart()
 
